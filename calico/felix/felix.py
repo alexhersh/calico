@@ -49,7 +49,6 @@ from calico.felix.fetcd import EtcdAPI
 
 _log = logging.getLogger(__name__)
 
-
 def _main_greenlet(config):
     """
     The root of our tree of greenlets.  Responsible for restarting

@@ -148,7 +148,7 @@ class TestIfStatus(object):
         is_timestamp =  timestamp_regex.match(str(other)) is not None
         return is_timestamp
     def __repr__(self):
-        return "<TestIfStatus()>"
+        return '%s()' % self.__class__.__name__
 
 class TestIfUptime(object):
     """
@@ -160,4 +160,4 @@ class TestIfUptime(object):
         is_non_negative = other >= 0
         return is_int and is_non_negative
     def __repr__(self):
-        return "<TestIfUptime()>"
+        return '%s()' % self.__class__.__name__

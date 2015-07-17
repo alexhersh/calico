@@ -344,7 +344,7 @@ class _EtcdWatcher(gevent.Greenlet):
 
             self._wait_for_ready()
 
-            while not self._configured.is_set():
+            while not self.configured.is_set():
                 self._load_config()
                 # Unblock anyone who's waiting on the config.
                 self.configured.set()
@@ -526,7 +526,6 @@ class _EtcdWatcher(gevent.Greenlet):
                                             timeout=Timeout(connect=10,
                                                             read=90),
                                             check_cluster_uuid=True)
-                _log.debug("etcd response: %r", response)
             except (ReadTimeoutError, SocketTimeout) as e:
                 # This is expected when we're doing a poll and nothing
                 # happened. socket timeout doesn't seem to be caught by
@@ -746,7 +745,7 @@ def _reconnect(etcd_communicator, copy_cluster_id=True):
         _log.info("(Re)connecting to etcd. No previous cluster ID.")
         old_cluster_id = None
     etcd_communicator.client = etcd.Client(host=host, port=port,
-                              expected_cluster_id=old_cluster_id)
+                                           expected_cluster_id=old_cluster_id)
 
 
 def _build_config_dict(cfg_node):
