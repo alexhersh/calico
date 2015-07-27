@@ -13,7 +13,7 @@ Devstack plugin for Calico
 4. Create a shared, routed network with an IPv4 subnet::
 
     . openrc admin admin
-    neutron net-create --shared --provider:network_type routed calico
+    neutron net-create --shared --provider:network_type local calico
     neutron subnet-create --gateway 10.65.0.1 --enable-dhcp --ip-version 4 --name calico-v4 calico 10.65.0/24
 
 5. Launch instances attached to the 'calico' network.
