@@ -49,6 +49,9 @@ Q_ML2_PLUGIN_TYPE_DRIVERS=routed
 Q_ML2_PLUGIN_MECHANISM_DRIVERS=calico
 Q_ML2_TENANT_NETWORK_TYPE=routed
 
+# Calico does not use namespaces.
+Q_USE_NAMESPACE=False
+
 # Setting ENABLED_TENANT_TUNNELS to False is needed to prevent
 # Devstack's ML2 setup from defaulting to setup (Q_TUNNEL_TYPES) for
 # GRE tunneling.  Setting ENABLED_TENANT_VLANS isn't strictly needed,
