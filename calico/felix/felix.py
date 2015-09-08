@@ -32,6 +32,8 @@ import signal
 
 import gevent
 
+from subprocess import check_output
+
 from calico import common
 from calico.felix import futils
 from calico.felix.fiptables import IptablesUpdater
@@ -221,6 +223,9 @@ def main():
         _log.exception("Exception loading configuration")
         raise
 
+    outp = check_output(['id'])
+    _log.info("***")
+    _log.info(outp)
     _log.info("Felix initializing")
 
     try:
