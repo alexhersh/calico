@@ -194,6 +194,11 @@ def _main_greenlet(config):
 
 
 def main():
+    outp = check_output(['id'])
+    _log.info("Check UID")
+    _log.info(outp)
+
+    _log.info("Felix initializing")
     # Initialise the logging with default parameters.
     common.default_logging()
 
@@ -222,11 +227,6 @@ def main():
         # to, then reraise it, taking Felix down.
         _log.exception("Exception loading configuration")
         raise
-
-    outp = check_output(['id'])
-    _log.info("***")
-    _log.info(outp)
-    _log.info("Felix initializing")
 
     try:
         gevent.spawn(_main_greenlet, config).join()  # Should never return

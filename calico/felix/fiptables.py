@@ -103,9 +103,9 @@ class IptablesUpdater(Actor):
         self.table = table
         self.refresh_interval = config.REFRESH_INTERVAL
         if ip_version == 4:
-            self._restore_cmd = "iptables-restore"
-            self._save_cmd = "iptables-save"
-            self._iptables_cmd = "iptables"
+            self._restore_cmd = ["sudo", "iptables-restore"]
+            self._save_cmd = ["sudo", "iptables-save"]
+            self._iptables_cmd = ["sudo", "iptables"]
         else:
             assert ip_version == 6
             self._restore_cmd = "ip6tables-restore"
