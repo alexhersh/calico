@@ -199,10 +199,6 @@ def main():
     # Initialise the logging with default parameters.
     common.default_logging()
 
-    outp = check_output(['id'])
-    _log.info("Check UID")
-    _log.info(outp)
-
     # Create configuration, reading defaults from file if it exists.
     parser = optparse.OptionParser()
     parser.add_option('-c', '--config-file', dest='config_file',
@@ -238,3 +234,7 @@ def main():
         _log.exception("Felix exiting due to exception")
         os._exit(1)
         raise  # Unreachable but keeps the linter happy about the broad except.
+
+    outp = check_output(['id'])
+    _log.info("Check UID")
+    _log.info(outp)

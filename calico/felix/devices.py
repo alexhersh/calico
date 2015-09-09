@@ -149,6 +149,7 @@ def add_route(ip_type, ip, interface, mac):
     :param str mac: MAC address. May not be None unless ip is None.
     :raises FailedSystemCall
     """
+    _log.info('Adding Route: IP:%s IF:%s' % (ip, interface))
     if mac is None and ip:
         raise ValueError("mac must be supplied if ip is provided")
 
@@ -169,6 +170,7 @@ def del_route(ip_type, ip, interface):
     :param str interface: Interface name
     :raises FailedSystemCall
     """
+    _log.info('Deleting Route: IP:%s IF:%s' % (ip, interface))
     if ip_type == futils.IPV4:
         futils.check_call(['arp', '-d', ip, '-i', interface])
         futils.check_call(["ip", "route", "del", ip, "dev", interface])
