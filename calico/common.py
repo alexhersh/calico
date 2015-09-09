@@ -217,14 +217,14 @@ def default_logging():
     else:
         # Probably unit tests running on windows.
         syslog_handler = logging.handlers.SysLogHandler()
-    syslog_handler.setLevel(logging.ERROR)
+    syslog_handler.setLevel(logging.DEBUG)
     syslog_handler.setFormatter(syslog_formatter)
 
     root_logger.addHandler(syslog_handler)
 
     file_formatter = logging.Formatter(FORMAT_STRING)
     stream_handler = logging.StreamHandler(sys.stdout)
-    stream_handler.setLevel(logging.ERROR)
+    stream_handler.setLevel(logging.DEBUG)
     stream_handler.setFormatter(file_formatter)
     stream_handler.addFilter(GreenletFilter())
     root_logger.addHandler(stream_handler)
@@ -232,8 +232,8 @@ def default_logging():
 
 def complete_logging(logfile=None,
                      file_level=logging.DEBUG,
-                     syslog_level=logging.ERROR,
-                     stream_level=logging.ERROR):
+                     syslog_level=logging.DEBUG,
+                     stream_level=logging.DEBUG):
     """
     Updates the logging configuration based on learned configuration.
 

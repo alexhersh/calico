@@ -679,7 +679,7 @@ class IptablesUpdater(Actor):
         else:
             raise NothingToDo()
 
-    def _execute_iptables(self, input_lines, fail_log_level=logging.ERROR):
+    def _execute_iptables(self, input_lines, fail_log_level=logging.DEBUG):
         """
         Runs ip(6)tables-restore with the given input.  Retries iff
         the COMMIT fails.
