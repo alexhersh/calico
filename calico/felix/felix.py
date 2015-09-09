@@ -194,13 +194,14 @@ def _main_greenlet(config):
 
 
 def main():
-    outp = check_output(['id'])
-    _log.info("Check UID")
-    _log.info(outp)
 
     _log.info("Felix initializing")
     # Initialise the logging with default parameters.
     common.default_logging()
+
+    outp = check_output(['id'])
+    _log.info("Check UID")
+    _log.info(outp)
 
     # Create configuration, reading defaults from file if it exists.
     parser = optparse.OptionParser()
