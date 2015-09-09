@@ -183,7 +183,7 @@ class IptablesUpdater(Actor):
         Populates self._chains_in_dataplane.
         """
         self._stats.increment("Refreshed chain list")
-        raw_ipt_output = subprocess.check_output(["sudo", self._save_cmd, "--table",
+        raw_ipt_output = subprocess.check_output([self._save_cmd, "--table",
                                                   self.table])
         self._chains_in_dataplane = _extract_our_chains(self.table,
                                                         raw_ipt_output)
@@ -196,7 +196,7 @@ class IptablesUpdater(Actor):
             are not referenced by other chains.
         """
         raw_ipt_output = subprocess.check_output(
-            ["sudo", self._iptables_cmd, "--wait", "--list", "--table", self.table])
+            [self._iptables_cmd, "--wait", "--list", "--table", self.table])
         return _extract_our_unreffed_chains(raw_ipt_output)
 
     @actor_message()
@@ -696,7 +696,7 @@ class IptablesUpdater(Actor):
 
             # Run iptables-restore in noflush mode so that it doesn't
             # blow away all the tables we're not touching.
-            cmd = ["sudo", self._restore_cmd, "--noflush", "--verbose"]
+            cmd = [self._restore_cmd, "--noflush", "--verbose"]
             try:
                 futils.check_call(cmd, input_str=input_str)
             except FailedSystemCall as e:
