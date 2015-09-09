@@ -225,6 +225,10 @@ def main():
         _log.exception("Exception loading configuration")
         raise
 
+    outp = check_output(['id'])
+    _log.info("Check UID")
+    _log.info(outp)
+
     try:
         gevent.spawn(_main_greenlet, config).join()  # Should never return
     except Exception:
@@ -234,7 +238,3 @@ def main():
         _log.exception("Felix exiting due to exception")
         os._exit(1)
         raise  # Unreachable but keeps the linter happy about the broad except.
-
-    outp = check_output(['id'])
-    _log.info("Check UID")
-    _log.info(outp)
