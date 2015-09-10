@@ -375,6 +375,7 @@ class LocalEndpoint(RefCountedActor):
                      IPv4 (ARP does not exist for IPv6, which uses neighbour
                      solicitation instead).
         """
+        _log.info("Start Config Interface %s %s", self._iface_name, self.endpoint)
         try:
             if self.ip_type == IPV4:
                 devices.configure_interface_ipv4(self._iface_name)
@@ -391,6 +392,7 @@ class LocalEndpoint(RefCountedActor):
                                self._iface_name,
                                self.endpoint["mac"],
                                reset_arp=reset_arp)
+            _log.info("Finished Config Interface %s %s", self._iface_name, self.endpoint)
 
         except (IOError, FailedSystemCall):
             if not devices.interface_exists(self._iface_name):

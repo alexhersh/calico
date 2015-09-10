@@ -220,10 +220,7 @@ def interface_up(if_name):
     flags_dir = '/sys/class/net/%s' % if_name
     flags_file = '%s/flags' % flags_dir
 
-    _log.info(flags_file)
-    _log.info(futils.check_call(["ls", "-la", flags_dir]))
-    _log.info(futils.check_call(["ls", "-la", flags_file]))
-    _log.info(futils.check_call(["cat", flags_file]))
+    _log.info("reading flags from %s", flags_file)
 
     try:
         with open(flags_file, 'r') as f:
