@@ -401,7 +401,8 @@ class LocalEndpoint(RefCountedActor):
                                reset_arp=reset_arp)
             _log.info("Finished Config Interface %s %s", self._iface_name, self.endpoint)
 
-        except (IOError, FailedSystemCall):
+        except (IOError, FailedSystemCall) as e:
+            _log.exception("CONFIG_IFACE ERROR: %r", e)
             if not devices.interface_exists(self._iface_name):
                 _log.info("Interface %s for %s does not exist yet",
                           self._iface_name, self.combined_id)
