@@ -107,17 +107,26 @@ def configure_interface_ipv4(if_name):
 
     with open('/proc/sys/net/ipv4/conf/%s/route_localnet' % if_name,
               'wb') as f:
+        _log.info("attempt write 1")
         f.write('1')
+        _log.info("complete write 1")
+
     out1 = futils.check_call(["cat","/proc/sys/net/ipv4/conf/%s/route_localnet" % if_name])
     _log.info("route_localnet should be 1, is: %s", out1)
 
     with open("/proc/sys/net/ipv4/conf/%s/proxy_arp" % if_name, 'wb') as f:
+        _log.info("attempt write 2")
         f.write('1')
+        _log.info("copmplete write 2")
+
     out2 = futils.check_call(["cat","/proc/sys/net/ipv4/conf/%s/proxy_arp" % if_name])
     _log.info("proxy_arp should be 1, is: %s", out2)
 
     with open("/proc/sys/net/ipv4/neigh/%s/proxy_delay" % if_name, 'wb') as f:
+        _log.info("attempt write 3")
         f.write('0')
+        _log.info("copmplete write 3")
+
     out3 = futils.check_call(["cat","/proc/sys/net/ipv4/neigh/%s/proxy_delay" % if_name])
     _log.info("proxy_delay should be 0, is: %s", out3)
 
