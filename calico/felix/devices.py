@@ -104,6 +104,8 @@ def configure_interface_ipv4(if_name):
     :returns: None
     """
     _log.info("Start config")
+    outf = futils.check_call(["find","/proc/sys/net/ipv4/conf/"])
+    _log.info("%s", outf)
 
     with open('/proc/sys/net/ipv4/conf/%s/route_localnet' % if_name,
               'wb') as f:
