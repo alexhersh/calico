@@ -113,6 +113,13 @@ def configure_interface_ipv4(if_name):
     with open("/proc/sys/net/ipv4/neigh/%s/proxy_delay" % if_name, 'wb') as f:
         f.write('0')
 
+    out1 = futils.check_call(["cat","/proc/sys/net/ipv4/conf/%s/route_localnet" % if_name])
+    out2 = futils.check_call(["cat","/proc/sys/net/ipv4/conf/%s/proxy_arp" % if_name])
+    out3 = futils.check_call(["cat","/proc/sys/net/ipv4/neigh/%s/proxy_delay" % if_name])
+
+    _log.info("route_localnet should be 1, is: %s", out1)
+    _log.info("proxy_arp should be 1, is: %s", out2)
+    _log.info("proxy_delay should be 0, is: %s", out3)
 
 def configure_interface_ipv6(if_name, proxy_target):
     """
