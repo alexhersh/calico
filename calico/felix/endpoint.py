@@ -378,16 +378,23 @@ class LocalEndpoint(RefCountedActor):
         _log.info("Start Config Interface %s %s", self._iface_name, self.endpoint)
         try:
             if self.ip_type == IPV4:
+                _log.info("calling configure_interface_ipv4 %s %s", self._iface_name, self.endpoint)
                 devices.configure_interface_ipv4(self._iface_name)
+                _log.info("called configure_interface_ipv4 %s %s", self._iface_name, self.endpoint)
                 reset_arp = mac_changed
             else:
+                _log.info("calling configure_interface_ipv6 %s %s", self._iface_name, self.endpoint)
                 ipv6_gw = self.endpoint.get("ipv6_gateway", None)
                 devices.configure_interface_ipv6(self._iface_name, ipv6_gw)
+                _log.info("called configure_interface_ipv6 %s %s", self._iface_name, self.endpoint)
                 reset_arp = False
 
             ips = set()
             for ip in self.endpoint.get(self.nets_key, []):
+                _log.info("calling net_to_ip %s %s", self._iface_name, self.endpoint)
                 ips.add(futils.net_to_ip(ip))
+                _log.info("called net_to_ip %s %s", self._iface_name, self.endpoint)
+
             devices.set_routes(self.ip_type, ips,
                                self._iface_name,
                                self.endpoint["mac"],
