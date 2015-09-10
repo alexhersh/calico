@@ -217,7 +217,13 @@ def interface_up(if_name):
     :param str if_name: Interface name
     :returns: True if interface up, False if down or cannot detect
     """
-    flags_file = '/sys/class/net/%s/flags' % if_name
+    flags_dir = '/sys/class/net/%s' % if_name
+    flags_file = '%s/flags' % flags_dir
+
+    _log.info(flags_file)
+    _log.info(futils.check_call(["ls", "-la", flags_dir]))
+    _log.info(futils.check_call(["ls", "-la", flags_file]))
+    _log.info(futils.check_call(["cat", flags_file]))
 
     try:
         with open(flags_file, 'r') as f:
